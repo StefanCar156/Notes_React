@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import NotesContainer from './components/NotesContainer';
+import Navbar from './components/Navbar';
+import Overlay from './components/Overlay';
+import Trash from './components/Trash';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Note from './components/Note';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={NotesContainer} />
+            <Route path="/trash" exact component={Trash} />
+            <Route path="/note" exact component={Note} />
+          </Switch>
+          <Overlay />
+      </div>
+    </Router>
   );
 }
 

@@ -1,38 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  position: relative;
+  width: 480px;
+  height: 100vh;
+  background-color: #f3f3f3;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px 10px;
+  overflow-y: scroll;
+}
+.App::-webkit-scrollbar {
+  display: none;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  display: none;
+}
+.overlay-active {
+  display: inline;
 }
 
-.App-link {
-  color: #61dafb;
+/* Navbar */
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Search Input */
+.search-container {
+  width: 95%;
+  background-color: rgb(220, 220, 220);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+}
+.search-btn {
+  display: flex;
+  margin-right: 5px;
+}
+.search-btn svg {
+  font-size: 20px;
+  color: rgb(100, 100, 100);
+}
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+.search-input::placeholder {
+  color: rgb(100, 100, 100);
+}
+.nav-options-btn {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  z-index: 4;
+}
+.nav-options-btn svg {
+  font-size: 24px;
+  user-select: none;
+}
+
+/* Options */
+.options-container {
+  background-color: #fff;
+  width: 200px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  right: -10px;
+  z-index: 3;
+  border-radius: 10px;
+  visibility: hidden;
+  transform: scale(0.9);
+  transition: all 0.1s ease-in;
+}
+.options-container-active {
+  visibility: visible;
+  transform: translateY(0);
+  transform: scale(1);
+}
+.options-container li {
+  font-weight: 600;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* Notes Container / Trash Container */
+.notes-container,
+.trash-container {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+}
+.notes-container-list,
+.trash-container-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.no-notes-notification {
+  font-size: 20px;
+  margin-top: 50px;
+  font-weight: 600;
+  color: rgb(100, 100, 100);
+  user-select: none;
+}
+/* Note Thumbnail */
+.note-thumbnail,
+.trash-note-thumbnail {
+  position: relative;
+  background-color: #fff;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+.remove-note-btn,
+.delete-note-btn,
+.restore-note-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  visibility: hidden;
+}
+.restore-note-btn {
+  right: 40px;
+}
+.note-thumbnail:hover .remove-note-btn,
+.trash-note-thumbnail:hover .delete-note-btn,
+.trash-note-thumbnail:hover .restore-note-btn {
+  visibility: visible;
+}
+.remove-note-btn svg,
+.delete-note-btn svg,
+.restore-note-btn svg {
+  font-size: 18px;
+  color: rgb(100, 100, 100);
+  user-select: none;
+}
+.thumbnail-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.thumbnail-content {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(100, 100, 100);
+  margin-bottom: 30px;
+}
+.thumbnail-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(100, 100, 100);
+  position: absolute;
+  bottom: 10px;
+}
+.open-new-note-btn {
+  position: absolute;
+  right: 20px;
+  top: 80vh;
+}
+.open-new-note-btn svg {
+  user-select: none;
+  color: rgb(255, 196, 0);
+  font-size: 60px;
+}
+
+/* Note */
+.note {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.back-btn {
+  align-self: start;
+  margin-bottom: 10px;
+}
+.back-btn svg {
+  pointer-events: none;
+  font-size: 22px;
+  color: rgb(100, 100, 100);
+}
+.note-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+}
+.note-content {
+  height: 65vh;
+}
+.note-text {
+  border: none;
+  outline: none;
+  overflow-y: scroll;
+  width: 100%;
+  height: 90%;
+}
+.note-text::-webkit-scrollbar {
+  display: none;
+}
+.add-note-btn {
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgb(255, 196, 0);
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 10px;
 }
