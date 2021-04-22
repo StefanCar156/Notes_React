@@ -14,7 +14,7 @@
     "react-scripts": "4.0.2",
     "web-vitals": "^1.1.0"
   },
-  "homepage": "https://stefancar156.github.io/notes_react",
+  "homepage": "https://StefanCar156.github.io/Notes_React",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
